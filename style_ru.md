@@ -53,7 +53,7 @@ row before the </tbody></table> line.
 ## Содержание
 
 - [Введение](#введение)
-- [Рекомендации](#рекомендации)
+- [Руководство](#руководство)
   - [Указатели на интерфейсы](#указатели-на-интерфейсы)
   - [Receivers and Interfaces](#receivers-and-interfaces)
   - [Zero-value Mutexes are Valid](#zero-value-mutexes-are-valid)
@@ -160,7 +160,7 @@ recommend setting up your editor to:
 Информация о поддержке Go редакторами и IDE:
 <https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins>
 
-## Рекомендации
+## Руководство
 
 ### Указатели на интерфейсы
 
