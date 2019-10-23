@@ -1,17 +1,19 @@
-This repository holds the [Uber Go Style Guide](style.md), which documents
-patterns and conventions used in Go code at Uber.
+Этот репозиторий содержит русский перевод рекомендаций по Go j от Uber [Руководство по стилю программирования на Go от Uber](style_ru.md), что соответсвует
+шиблонам и соглашениям, используемым для программирования на Go в Uber.
 
-## Style Guide
+## Руководство по стилю 
 
-See [Uber Go Style Guide](style.md) for the style guide.
+Смотрите [Руководство по стилю программирования на Go от Uber](style_ru.md).
 
 ## Translations
+Имеются дополнительный переводы оригинального руководства, осуществленные 
+участниками сообества Go.
 
-We are aware of the following translations of this guide by the Go community.
 
+- **ORIGINAL** (English): [uber-go/guide](https://github.com/uber-go/guide)
 - **中文翻译** (Chinese): [xxjwxc/uber_go_guide_cn](https://github.com/xxjwxc/uber_go_guide_cn)
 - **한국어 번역** (Korean): [TangoEnSkai/uber-go-style-guide-kr](https://github.com/TangoEnSkai/uber-go-style-guide-kr)
 - **日本語訳** (Japanese): [knsh14/uber-style-guide-ja](https://github.com/knsh14/uber-style-guide-ja)
 - **Traducción al Español** (Spanish): [friendsofgo/uber-go-guide-es](https://github.com/friendsofgo/uber-go-guide-es)
 
-If you have a translation, feel free to submit a PR adding it to the list.
+Если вы осуществили перевод и хотите добавить его в список, смело можете сабмитить PR.
