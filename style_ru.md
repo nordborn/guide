@@ -48,7 +48,7 @@ row before the </tbody></table> line.
 
 -->
 
-# Руководство по стилю программироввания на Go от Uber
+# Руководство по стилю Go от Uber
 
 ## Содержание
 
@@ -106,7 +106,7 @@ formatting—gofmt handles that for us. -->
 Стили - это соглашения, которые управляют нашим кодом. Термин стиль - это
 недостатоно точное название, так как соглашения - это гораздо больше, чем просто
 форматирование исходного кода, которое gofmt и так делает для нас.
-s
+
 <!-- The goal of this guide is to manage this complexity by describing in detail the
 Dos and Don'ts of writing Go code at Uber. 
 These rules exist to keep the code base manageable while still 
