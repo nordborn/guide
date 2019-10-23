@@ -55,7 +55,7 @@ row before the </tbody></table> line.
 - [Введение](#введение)
 - [Руководство](#руководство)
   - [Указатели на интерфейсы](#указатели-на-интерфейсы)
-  - [Receivers and Interfaces](#receivers-and-interfaces)
+  - [Получатели и интерфейсы](#получатели-и-интерфейсы)
   - [Zero-value Mutexes are Valid](#zero-value-mutexes-are-valid)
   - [Copy Slices and Maps at Boundaries](#copy-slices-and-maps-at-boundaries)
   - [Defer to Clean Up](#defer-to-clean-up)
@@ -190,11 +190,11 @@ pointer. -->
 Если вы хотите, чтобы методы интерфейса изменяли базовые данные, надо использовать
 указатель.
 
-### Receivers and Interfaces
+### Получатели и интерфейсы
 
-Methods with value receivers can be called on pointers as well as values.
+Методы с приемниками (получателями) по значению могут вызываться как для указателей, так и для значений.
 
-For example,
+Например,
 
 ```go
 type S struct {
@@ -211,21 +211,25 @@ func (s *S) Write(str string) {
 
 sVals := map[int]S{1: {"A"}}
 
-// You can only call Read using a value
+// Вы можете вызвать Read для значения
 sVals[1].Read()
 
-// This will not compile:
+// Это не скомпилируется:
 //  sVals[1].Write("test")
 
 sPtrs := map[int]*S{1: {"A"}}
 
-// You can call both Read and Write using a pointer
+// Вы можете вызвать Read and Write для указателя
 sPtrs[1].Read()
 sPtrs[1].Write("test")
 ```
 
-Similarly, an interface can be satisfied by a pointer, even if the method has a
-value receiver.
+<!-- Similarly, an interface can be satisfied by a pointer, even if the method has a
+value receiver. -->
+
+Аналогично, интерфейс может быть удовлетворен указателем, даже если метод определен
+для приемника по значению.
+
 
 ```go
 type F interface {
@@ -250,13 +254,48 @@ i = s1Val
 i = s1Ptr
 i = s2Ptr
 
-// The following doesn't compile, since s2Val is a value, and there is no value receiver for f.
+// Это не скомпилируется, т.к. s2Val это значение, а S2.f не имеет получателя по значению.
 //   i = s2Val
 ```
 
-Effective Go has a good write up on [Pointers vs. Values].
+<!-- Effective Go has a good write up on [Pointers vs. Values]. -->
+
+Указатели и значения хорошо описаны в Effective Go [Pointers vs. Values].
 
   [Pointers vs. Values]: https://golang.org/doc/effective_go.html#pointers_vs_values
+
+
+> Прим. перев. Общее правило: 
+Значение не обладает методами, определенными для указателя. 
+При непосредственном вызове метода в коде, компилятор делает приведение к нужному типу (значению или указателю),
+способному принять указанный метод, но при передаче аргумента в функцию, ожидающей удовлетворение определенному интерфейсу,
+> следите за тем, что передаете: значение или по указатель. 
+>Еще раз: **только указатель обладает методами, определенными как для значения так и указателя**. 
+
+Еще пример:
+```go
+type A struct {
+	V string
+}
+
+func (a *A) String() string {
+	return "A:" + a.V
+}
+
+func main() {
+	xVal := A{"x"}
+	yPtr := &A{"y"}
+
+	// Выведет
+	// {x}, A:y
+	// xVal не обладает String(), определенным для *A
+	fmt.Printf("%s, %s\n", xVal, yPtr)
+
+ 	// Теперь ОК, выведет
+	// A:x, A:y
+	fmt.Printf("%s, %s\n", &xVal, yPtr)
+}
+```
 
 ### Zero-value Mutexes are Valid
 
