@@ -103,9 +103,9 @@ row before the </tbody></table> line.
 misnomer, since these conventions cover far more than just source file
 formatting—gofmt handles that for us. -->
 
-Стили - это соглашения, которые управляют нашим кодом. Термин стиль - это
-недостатоно точное название, так как соглашения - это гораздо больше, чем просто
-форматирование исходного кода, которое gofmt и так делает для нас.
+Стили - это соглашения, которые управляют нашим кодом. 
+Термин стиль - недостаточно точное название, так как подобные соглашения охватывают гораздо больше, 
+чем просто вопросы форматирования кода (которое gofmt и так делает для нас).
 
 <!-- The goal of this guide is to manage this complexity by describing in detail the
 Dos and Don'ts of writing Go code at Uber. 
