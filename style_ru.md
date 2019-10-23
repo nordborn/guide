@@ -123,7 +123,7 @@ productively. -->
 a way to bring some colleagues up to speed with using Go. Over the years it has
 been amended based on feedback from others. -->
 
-Данное руководство было первоначально создано [Prashant Varanasi] и [Simon Newton]
+Данное руководство было создано [Prashant Varanasi] и [Simon Newton]
 чтобы помочь коллегам улучшить их опыт пользования Go. 
 Оно исправляется и дорабатывается на протяжении многих лет 
 с учетом полученных отзывов.
@@ -135,7 +135,7 @@ been amended based on feedback from others. -->
 of these are general guidelines for Go, while others extend upon external
 resources: -->
 
-Здесь задокументированы идиоматические соглашения при разработке на Go, которым мы следуем в Uber. 
+Здесь задокументированы идиоматические соглашения при разработке на Go, которым следуют в Uber. 
 Помимо общих рекомендаций, часть их также распространяется и на 
 внешние ресурсы:
 
