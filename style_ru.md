@@ -136,7 +136,7 @@ of these are general guidelines for Go, while others extend upon external
 resources: -->
 
 Здесь задокументированы идиоматические соглашения при разработке на Go, которым мы следуем в Uber. 
-Помимо общих рекомендаций, часть из них также распространяются на 
+Помимо общих рекомендаций, часть их также распространяется и на 
 внешние ресурсы:
 
 1. [Effective Go](https://golang.org/doc/effective_go.html)
