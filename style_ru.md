@@ -58,7 +58,7 @@ row before the </tbody></table> line.
   - [Получатели и интерфейсы](#получатели-и-интерфейсы)
   - [Мьютексы с нулевыми значаниями корректны](#мьютексы-с-нулевыми-значаниями-корректны)
   - [Копирование срезов и карт](#копирование-срезов-и-карт)
-  - [Defer to Clean Up](#defer-to-clean-up)
+  - [Defer для освобождения ресурсов](#defer-для-освобождения-ресурсов)
   - [Channel Size is One or None](#channel-size-is-one-or-none)
   - [Start Enums at One](#start-enums-at-one)
   - [Error Types](#error-types)
@@ -517,12 +517,14 @@ snapshot := stats.Snapshot()
 </td></tr>
 </tbody></table>
 
-### Defer to Clean Up
+### Defer для освобождения ресурсов
 
-Use defer to clean up resources such as files and locks.
+<!-- Use defer to clean up resources such as files and locks. -->
+
+Используйте инструкцию defer для освобождения ресурсов, таких как файлы и блокировки мьютексами (locks).
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Плохо</th><th>Хорошо</th></tr></thead>
 <tbody>
 <tr><td>
 
@@ -539,7 +541,7 @@ p.Unlock()
 
 return newCount
 
-// easy to miss unlocks due to multiple returns
+// легко можно забыть снять блокировку из-за нескольких точек возврата
 ```
 
 </td><td>
@@ -555,17 +557,23 @@ if p.count < 10 {
 p.count++
 return p.count
 
-// more readable
+// читается лучше
 ```
 
 </td></tr>
 </tbody></table>
 
-Defer has an extremely small overhead and should be avoided only if you can
+<!-- Defer has an extremely small overhead and should be avoided only if you can
 prove that your function execution time is in the order of nanoseconds. The
 readability win of using defers is worth the miniscule cost of using them. This
 is especially true for larger methods that have more than simple memory
-accesses, where the other computations are more significant than the `defer`.
+accesses, where the other computations are more significant than the `defer`. -->
+
+Defer имеет очень незначительные накладные расходы, и его следует избегать только если вы 
+докажете, что время выполнения вашей функции измеряется в наносекундах. 
+Читабельность кода точно улучшается при использовании `defer`, а стоит это мизерных затрат. 
+Это особенно верно для больших методов, которые делают что-то большее, чем простой доступ
+к памяти, где другие вычисления более значительны, чем использование `defer`.
 
 ### Channel Size is One or None
 
