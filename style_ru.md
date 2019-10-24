@@ -521,7 +521,7 @@ snapshot := stats.Snapshot()
 
 <!-- Use defer to clean up resources such as files and locks. -->
 
-Используйте инструкцию defer для освобождения ресурсов, таких как файлы и блокировки мьютексами (locks).
+Используйте `defer` для освобождения ресурсов, таких как файлы и блокировки мьютексов (locks).
 
 <table>
 <thead><tr><th>Плохо</th><th>Хорошо</th></tr></thead>
