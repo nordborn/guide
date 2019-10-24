@@ -57,7 +57,7 @@ row before the </tbody></table> line.
   - [Указатели на интерфейсы](#указатели-на-интерфейсы)
   - [Получатели и интерфейсы](#получатели-и-интерфейсы)
   - [Мьютексы с нулевыми значаниями корректны](#мьютексы-с-нулевыми-значаниями-корректны)
-  - [Copy Slices and Maps at Boundaries](#copy-slices-and-maps-at-boundaries)
+  - [Копирование срезов и карт](#копирование-срезов-и-карт)
   - [Defer to Clean Up](#defer-to-clean-up)
   - [Channel Size is One or None](#channel-size-is-one-or-none)
   - [Start Enums at One](#start-enums-at-one)
@@ -326,10 +326,17 @@ mu.Lock()
 </td></tr>
 </tbody></table>
 
-If you use a struct by pointer, then the mutex can be a non-pointer field.
 
-Unexported structs that use a mutex to protect fields of the struct may embed
-the mutex.
+<!-- If you use a struct by pointer, then the mutex can be a non-pointer field. -->
+
+Если вы используете структуру по указателю, мьютекс вполне может быть полем-значением.
+
+<!-- Unexported structs that use a mutex to protect fields of the struct may embed
+the mutex. -->
+
+ 
+Неэкспортируемые структуры, использующие мьютекс для своих полей, могут включать (встраивать)
+мьютекс.
 
 <table>
 <tbody>
@@ -337,7 +344,7 @@ the mutex.
 
 ```go
 type smap struct {
-  sync.Mutex // only for unexported types
+  sync.Mutex // только для неэкспортируемых типов
 
   data map[string]string
 }
@@ -381,26 +388,38 @@ func (m *SMap) Get(k string) string {
 
 </td></tr>
 
-</tr>
-<tr>
-<td>Embed for private types or types that need to implement the Mutex interface.</td>
-<td>For exported types, use a private field.</td>
+<tr><td>
+<!-- Embed for private types or types that need to implement the Mutex interface. -->
+Встраивайте только для неэкспортируемых (приватных) типов или типов, которые должны соответствовать интерфейсу Mutex.
+</td>
+<td>
+<!-- For exported types, use a private field. -->
+Для экспортируемых типов используйте приватное поле
+</td>
 </tr>
 
 </tbody></table>
 
-### Copy Slices and Maps at Boundaries
+<!-- ### Copy Slices and Maps at Boundaries -->
+### Копирование срезов и карт
 
-Slices and maps contain pointers to the underlying data so be wary of scenarios
-when they need to be copied.
+<!-- Slices and maps contain pointers to the underlying data so be wary of scenarios
+when they need to be copied. -->
 
-#### Receiving Slices and Maps
+Срезы и карты содержат указатели на базовые (нижележащие) данные, поэтому будьте осторожны со сценариями
+когда их нужно скопировать.
 
-Keep in mind that users can modify a map or slice you received as an argument
-if you store a reference to it.
+<!-- #### Receiving Slices and Maps -->
+#### Получение срезов и карт
+
+<!-- Keep in mind that users can modify a map or slice you received as an argument
+if you store a reference to it. -->
+
+Имейте в виду, что пользователи могут изменить карту или срез, 
+которые вы получили в качестве аргумента, пока вы храните ссылку на нее/него.
 
 <table>
-<thead><tr><th>Bad</th> <th>Good</th></tr></thead>
+<thead><tr><th>Плохо</th> <th>Хорошо</th></tr></thead>
 <tbody>
 <tr>
 <td>
@@ -413,7 +432,7 @@ func (d *Driver) SetTrips(trips []Trip) {
 trips := ...
 d1.SetTrips(trips)
 
-// Did you mean to modify d1.trips?
+// Вы точно хотите изменить d1.trips?
 trips[0] = ...
 ```
 
@@ -429,7 +448,7 @@ func (d *Driver) SetTrips(trips []Trip) {
 trips := ...
 d1.SetTrips(trips)
 
-// We can now modify trips[0] without affecting d1.trips.
+// Мы можем изменить trips[0], не изменив при этом d1.trips.
 trips[0] = ...
 ```
 
@@ -439,13 +458,17 @@ trips[0] = ...
 </tbody>
 </table>
 
-#### Returning Slices and Maps
+<!-- #### Returning Slices and Maps -->
+#### Возврат срезов и карт
 
-Similarly, be wary of user modifications to maps or slices exposing internal
-state.
+<!-- Similarly, be wary of user modifications to maps or slices exposing internal
+state. -->
+
+Аналогично, будьте осторожны с внешними изменениями карт или срезов, представляющих внутренние
+состояние.
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Плохо</th><th>Хорошо</th></tr></thead>
 <tbody>
 <tr><td>
 
@@ -455,7 +478,7 @@ type Stats struct {
   counters map[string]int
 }
 
-// Snapshot returns the current stats.
+// Snapshot возвращает некоторую текущую статистику.
 func (s *Stats) Snapshot() map[string]int {
   s.mu.Lock()
   defer s.mu.Unlock()
@@ -463,8 +486,8 @@ func (s *Stats) Snapshot() map[string]int {
   return s.counters
 }
 
-// snapshot is no longer protected by the mutex, so any
-// access to the snapshot is subject to data races.
+// snapshot (и, соответственно, stats.counters) больше не под мьютексом, 
+// поэтому любой доступ к этой переменной может привести к состоянию гонки.
 snapshot := stats.Snapshot()
 ```
 
@@ -487,7 +510,7 @@ func (s *Stats) Snapshot() map[string]int {
   return result
 }
 
-// Snapshot is now a copy.
+// snapshot теперь копия оригинальных данных.
 snapshot := stats.Snapshot()
 ```
 
