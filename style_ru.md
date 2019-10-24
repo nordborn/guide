@@ -56,7 +56,7 @@ row before the </tbody></table> line.
 - [Руководство](#руководство)
   - [Указатели на интерфейсы](#указатели-на-интерфейсы)
   - [Получатели и интерфейсы](#получатели-и-интерфейсы)
-  - [Zero-value Mutexes are Valid](#zero-value-mutexes-are-valid)
+  - [Мьютексы с нулевыми значаниями корректны](#мьютексы-с-нулевыми-значаниями-корректны)
   - [Copy Slices and Maps at Boundaries](#copy-slices-and-maps-at-boundaries)
   - [Defer to Clean Up](#defer-to-clean-up)
   - [Channel Size is One or None](#channel-size-is-one-or-none)
@@ -297,13 +297,17 @@ func main() {
 }
 ```
 
-### Zero-value Mutexes are Valid
+### Мьютексы с нулевыми значаниями корректны
 
-The zero-value of `sync.Mutex` and `sync.RWMutex` is valid, so you almost
-never need a pointer to a mutex.
+<!-- The zero-value of `sync.Mutex` and `sync.RWMutex` is valid, so you almost
+never need a pointer to a mutex. -->
+
+Корректным будет использование `sync.Mutex` and `sync.RWMutex` с нулевыми значениями (zero-value), 
+вам почти никогда не нужен будет указатель на мьютекс.
+
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Плохо</th><th>Хорошо</th></tr></thead>
 <tbody>
 <tr><td>
 
