@@ -406,7 +406,7 @@ func (m *SMap) Get(k string) string {
 <!-- Slices and maps contain pointers to the underlying data so be wary of scenarios
 when they need to be copied. -->
 
-Срезы и карты содержат указатели на базовые (нижележащие) данные, поэтому будьте осторожны со сценариями
+Срезы (slice) и карты (map) содержат указатели на базовые (нижележащие) данные, поэтому будьте осторожны со сценариями
 когда их нужно скопировать.
 
 <!-- #### Receiving Slices and Maps -->
@@ -617,14 +617,19 @@ c := make(chan int)
 </td></tr>
 </tbody></table>
 
-### Start Enums at One
+<!-- ### Start Enums at One -->
+### Начинайте перечисления с единицы
 
-The standard way of introducing enumerations in Go is to declare a custom type
+<!-- The standard way of introducing enumerations in Go is to declare a custom type
 and a `const` group with `iota`. Since variables have a 0 default value, you
-should usually start your enums on a non-zero value.
+should usually start your enums on a non-zero value. -->
+
+Стандартный способ организации перечислений в Go - объявить пользовательский тип
+и группу `const` с `iota`. Поскольку (числовые) переменные имеют значение по умолчанию 0, вам
+следует начинать перечисления с ненулевого значения.
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Плохо</th><th>Хорошо</th></tr></thead>
 <tbody>
 <tr><td>
 
@@ -657,8 +662,11 @@ const (
 </td></tr>
 </tbody></table>
 
-There are cases where using the zero value makes sense, for example when the
-zero value case is the desirable default behavior.
+<!-- There are cases where using the zero value makes sense, for example when the
+zero value case is the desirable default behavior. -->
+
+Есть случаи, когда использование нулевого значения имеет смысл, например, когда
+нулевое значение `case` является желательным поведением по умолчанию.
 
 ```go
 type LogOutput int
