@@ -59,7 +59,7 @@ row before the </tbody></table> line.
   - [Мьютексы с нулевыми значаниями корректны](#мьютексы-с-нулевыми-значаниями-корректны)
   - [Копирование срезов и карт](#копирование-срезов-и-карт)
   - [Defer для освобождения ресурсов](#defer-для-освобождения-ресурсов)
-  - [Channel Size is One or None](#channel-size-is-one-or-none)
+  - [Каналы единичного или нулевого размера](#каналы-единичного-или-нулевого-размера)
   - [Start Enums at One](#start-enums-at-one)
   - [Error Types](#error-types)
   - [Error Wrapping](#error-wrapping)
@@ -580,30 +580,37 @@ Defer имеет очень незначительные накладные ра
 Это особенно верно для больших методов, которые делают что-то большее, чем простой доступ
 к памяти, где другие вычисления более значительны, чем использование `defer`.
 
-### Channel Size is One or None
+<!-- ### Channel Size is One or None -->
+### Каналы единичного или нулевого размера
 
-Channels should usually have a size of one or be unbuffered. By default,
+<!-- Channels should usually have a size of one or be unbuffered. By default,
 channels are unbuffered and have a size of zero. Any other size
 must be subject to a high level of scrutiny. Consider how the size is
 determined, what prevents the channel from filling up under load and blocking
-writers, and what happens when this occurs.
+writers, and what happens when this occurs. -->
+
+Каналы, как правило, должны иметь размер 1 или быть небуферизованными. По умолчанию,
+каналы не буферизованы и имеют нулевой размер. Любой другой размер
+должен быть объектом пристального контроля. Изучите как определен требуемый размер, 
+что препятствует заполнению канала под нагрузкой и блокировке
+писателей, а что происходит, когда это случается.
 
 <table>
-<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<thead><tr><th>Плохо</th><th>Хорошо</th></tr></thead>
 <tbody>
 <tr><td>
 
 ```go
-// Ought to be enough for anybody!
+// Этого хватит на всех!
 c := make(chan int, 64)
 ```
 
 </td><td>
 
 ```go
-// Size of one
-c := make(chan int, 1) // or
-// Unbuffered channel, size of zero
+// Единичный размер
+c := make(chan int, 1) // или
+// Небуферизированный канал, нулевой размер
 c := make(chan int)
 ```
 
