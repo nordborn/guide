@@ -448,7 +448,8 @@ func (d *Driver) SetTrips(trips []Trip) {
 trips := ...
 d1.SetTrips(trips)
 
-// Мы можем изменить trips[0], не изменив при этом d1.trips.
+// Мы можем изменить trips[0], 
+// не изменив при этом d1.trips.
 trips[0] = ...
 ```
 
@@ -486,8 +487,10 @@ func (s *Stats) Snapshot() map[string]int {
   return s.counters
 }
 
-// snapshot (и, соответственно, stats.counters) больше не под мьютексом, 
-// поэтому любой доступ к этой переменной может привести к состоянию гонки.
+// snapshot (и, соответственно, stats.counters) 
+// больше не под мьютексом, 
+// поэтому любой доступ к этой переменной 
+// может привести к состоянию гонки.
 snapshot := stats.Snapshot()
 ```
 
