@@ -487,7 +487,7 @@ func (s *Stats) Snapshot() map[string]int {
   return s.counters
 }
 
-// snapshot (и, соответственно, stats.counters) 
+// snapshot (а теперь и stats.counters) 
 // больше не под мьютексом, 
 // поэтому любой доступ к этой переменной 
 // может привести к состоянию гонки.
