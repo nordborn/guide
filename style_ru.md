@@ -60,7 +60,7 @@ row before the </tbody></table> line.
   - [Копирование срезов и карт](#копирование-срезов-и-карт)
   - [Defer для освобождения ресурсов](#defer-для-освобождения-ресурсов)
   - [Каналы единичного или нулевого размера](#каналы-единичного-или-нулевого-размера)
-  - [Start Enums at One](#start-enums-at-one)
+  - [Начинайте перечисления с единицы](#начинайте-перечисления-с-единицы)
   - [Error Types](#error-types)
   - [Error Wrapping](#error-wrapping)
   - [Handle Type Assertion Failures](#handle-type-assertion-failures)
