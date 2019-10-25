@@ -479,7 +479,7 @@ type Stats struct {
   counters map[string]int
 }
 
-// Snapshot возвращает некоторую текущую статистику.
+// Snapshot возвращает текущее состояние.
 func (s *Stats) Snapshot() map[string]int {
   s.mu.Lock()
   defer s.mu.Unlock()
