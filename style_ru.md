@@ -524,7 +524,7 @@ snapshot := stats.Snapshot()
 
 <!-- Use defer to clean up resources such as files and locks. -->
 
-Используйте `defer` для освобождения ресурсов, таких как файлы и блокировки мьютексов (locks).
+Используйте `defer` для освобождения ресурсов, таких как файлы и блокировки (мьютексов).
 
 <table>
 <thead><tr><th>Плохо</th><th>Хорошо</th></tr></thead>
@@ -561,7 +561,8 @@ if p.count < 10 {
 p.count++
 return p.count
 
-// так читается лучше
+// так читается лучше 
+// и потенциальных ошибок меньше
 ```
 
 </td></tr>
